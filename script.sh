@@ -12,9 +12,9 @@ then
         spinstr='|/-\'
         temp=${spinstr#?}
         printf "$info [%c]  " "$spinstr"
-        local spinstr=$temp${spinstr%"$temp"}
+        spinstr=$temp${spinstr%"$temp"}
         sleep $delay
-        local reset="\b\b\b\b\b\b"
+        reset="\b\b\b\b\b\b"
         for ((i=1; i<=$(printf $info | wc -c); i++)); do
             reset+="\b"
         done
