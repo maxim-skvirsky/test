@@ -9,17 +9,22 @@ then
     info="waiting for conflicts to be resolved ..."
     delay=0.2
     spinstr='|/-\'
+    echo $info
     while [ ! -z "$merge_state" ]; do
         temp=${spinstr#?}
-        printf "$info [%c]" "$spinstr"
+        printf "[%c]" "$spinstr"
         spinstr=$temp${spinstr%"$temp"}
         sleep $delay
-        reset="\b\b\b\b\b\b"
-        for ((i=1; i<=$(echo $info | wc -c); i++)); do
-            reset+="\b"
-        done
+        reset="\b\b\b"
+        # reset="\b\b\b\b\b\b"
+        # for ((i=1; i<=$(echo $info | wc -c); i++)); do
+        #     reset+="\b"
+        # done
         printf $reset
         merge_state=$(git diff --full-index && git diff-index HEAD)
+        if [[ -z "$merge_state" ]]; then
+            printf "${CHECK_MARK}"
+        fi
     done
     echo ""
     echo "Conflicts resolved. Continueing"
