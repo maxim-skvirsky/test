@@ -11,6 +11,7 @@ then
     spinstr='|/-\'
     echo $info
     while [ ! -z "$merge_state" ]; do
+        tput civis
         temp=${spinstr#?}
         printf "[%c]" "$spinstr"
         spinstr=$temp${spinstr%"$temp"}
@@ -26,6 +27,7 @@ then
             echo "[done]"
         fi
     done
+    tput cnorm
     echo ""
     echo "Conflicts resolved. Continuing"
 else
