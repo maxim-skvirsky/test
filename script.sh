@@ -23,7 +23,7 @@ then
         printf $reset
         merge_state=$(git diff --full-index && git diff-index HEAD)
         if [[ -z "$merge_state" ]]; then
-            printf "${CHECK_MARK}"
+            echo -e "${CHECK_MARK}"
         fi
     done
     echo ""
