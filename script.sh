@@ -5,11 +5,11 @@ if [[ $out == CONFLICT* ]]
 then
     # echo $out
     echo "Please fix merge conflicts, the script will resume once conflicts are resolved and commited."
-    merge_state=$(git diff --full-index)
+    merge_state=$(git diff --full-index && git diff-index HEAD)
+    info="waiting for conflicts to be resolved ..."
+    delay=0.75
+    spinstr='|/-\'
     while [ ! -z "$merge_state" ]; do
-        info="waiting for conflicts to be resolved ..."
-        delay=0.75
-        spinstr='|/-\'
         temp=${spinstr#?}
         printf "$info [%c]  " "$spinstr"
         spinstr=$temp${spinstr%"$temp"}
@@ -19,7 +19,7 @@ then
             reset+="\b"
         done
         printf $reset
-        merge_state=$(git diff --full-index)
+        merge_state=$(git diff --full-index && git diff-index HEAD)
     done
     echo "Conflicts resolved. Continueing"
 else
