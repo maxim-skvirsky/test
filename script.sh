@@ -1,5 +1,5 @@
 ensure_no_confilicts () {
-    out = "$1"
+    out="$1"
     if [[ $out == CONFLICT* ]]
     then
         # echo $out
