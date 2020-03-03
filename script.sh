@@ -1,7 +1,7 @@
 git branch -D TEMP
 git checkout -b TEMP
 out=$(git merge master)
-if [[ $out == CONFLICT*]]
+if [[ $out == CONFLICT* ]]
 then 
     echo "conflict"
 else
