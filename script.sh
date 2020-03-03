@@ -7,11 +7,11 @@ then
     echo "Please fix merge conflicts, the script will resume once conflicts are resolved and commited."
     merge_state=$(git diff --full-index && git diff-index HEAD)
     info="waiting for conflicts to be resolved ..."
-    delay=0.75
+    delay=0.2
     spinstr='|/-\'
     while [ ! -z "$merge_state" ]; do
         temp=${spinstr#?}
-        printf "$info [%c]  " "$spinstr"
+        printf "$info [%c]" "$spinstr"
         spinstr=$temp${spinstr%"$temp"}
         sleep $delay
         reset="\b\b\b\b\b\b"
@@ -21,6 +21,7 @@ then
         printf $reset
         merge_state=$(git diff --full-index && git diff-index HEAD)
     done
+    echo ""
     echo "Conflicts resolved. Continueing"
 else
     echo "all gewd"
