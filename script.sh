@@ -8,7 +8,7 @@ then
     merge_state=$(git diff --full-index)
     while [ ! -z "$merge_state" ]; do
         info="waiting for conflicts to be resolved ..."
-        delay=1
+        delay=0.75
         spinstr='|/-\'
         temp=${spinstr#?}
         printf "$info [%c]  " "$spinstr"
@@ -21,7 +21,6 @@ then
         printf $reset
         merge_state=$(git diff --full-index)
     done
-    echo "    \b\b\b\b"
     echo "Conflicts resolved. Continueing"
 else
     echo "all gewd"
