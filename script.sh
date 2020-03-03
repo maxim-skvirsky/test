@@ -23,11 +23,11 @@ then
         printf $reset
         merge_state=$(git diff --full-index && git diff-index HEAD)
         if [[ -z "$merge_state" ]]; then
-            echo -e "${CHECK_MARK}"
+            echo "[done]"
         fi
     done
     echo ""
-    echo "Conflicts resolved. Continueing"
+    echo "Conflicts resolved. Continuing"
 else
     echo "all gewd"
 fi
