@@ -32,14 +32,12 @@ ensure_no_confilicts () {
 }
 git branch -D TEMP
 git checkout -b TEMP
-message=$(git merge master)
-echo "$message"
-# ensure_no_confilicts $(git merge master)
-# git checkout master
-# git merge TEMP
-# git push
-# git checkout $branch
-# echo "Done :)"
+ensure_no_confilicts $(git merge master)
+git checkout master
+git merge TEMP
+git push
+git checkout $branch
+echo "Done :)"
 
 
 # echo "**********************************************************
