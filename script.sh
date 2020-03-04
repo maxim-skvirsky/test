@@ -1,12 +1,11 @@
 # handles a merge to be passed without conflicts
 # forces user to resolve through git ui in vscode
 ensure_no_confilicts () {
-    out="$1"
-    if [[ $out == CONFLICT* ]]
+    temp="$1"
+    merge_state=$(git diff --full-index && git diff-index HEAD)
+    if [ ! -z "$merge_state" ]
     then
-        # echo $out
         echo "To continue - please resolve and commit merge conflicts in the GIT panel."
-        merge_state=$(git diff --full-index && git diff-index HEAD)
         info="waiting for conflicts to be resolved and commited..."
         delay=0.2
         spinstr='|/-\'
@@ -31,10 +30,9 @@ ensure_no_confilicts () {
         echo "No Conflicts to resolve"
     fi
 }
-var="var"
 git branch -D TEMP
 git checkout -b TEMP
-ensure_no_confilicts $(git merge $var)
+ensure_no_confilicts $(git merge master)
 git checkout master
 git merge TEMP
 git push
