@@ -31,10 +31,10 @@ ensure_no_confilicts () {
         echo "No Conflicts to resolve"
     fi
 }
-
+var="var"
 git branch -D TEMP
 git checkout -b TEMP
-ensure_no_confilicts $(git merge master)
+ensure_no_confilicts $(git merge $var)
 git checkout master
 git merge TEMP
 git push
